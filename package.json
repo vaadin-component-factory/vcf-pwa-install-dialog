@@ -1,0 +1,71 @@
+{
+  "name": "@vaadin-component-factory/vcf-pwa-install-dialog",
+  "version": "0.1.0",
+  "description": "Vaadin Component Factory PWA Install Dialog",
+  "main": "theme/lumo/vcf-pwa-install-dialog.js",
+  "author": "Vaadin Ltd",
+  "license": "https://raw.githubusercontent.com/vaadin/vaadin-incubator-element/master/LICENSE",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vaadin-component-factory/vcf-pwa-install-dialog.git"
+  },
+  "keywords": [
+    "Vaadin",
+    "vaadin-incubator-element",
+    "vaadin-component-factory",
+    "vcf-pwa-install-dialog",
+    "web-components",
+    "web-component",
+    "polymer"
+  ],
+  "scripts": {
+    "test": "wct",
+    "lint": "eslint src/*.js",
+    "start": "polymer serve -o"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/*.js": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "@polymer/polymer": "^3.0.0",
+    "@vaadin/vaadin-element-mixin": "^2.1.3",
+    "@vaadin/vaadin-lumo-styles": "^1.5.0",
+    "@vaadin/vaadin-themable-mixin": "^1.4.4"
+  },
+  "devDependencies": {
+    "@polymer/iron-demo-helpers": "^3.0.0-pre.19",
+    "@polymer/test-fixture": "^4.0.2",
+    "@webcomponents/webcomponentsjs": "^2.0.0",
+    "babel-eslint": "^10.0.1",
+    "chai": "^4.2.0",
+    "colors": "^1.3.3",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.3.0",
+    "eslint-config-vaadin": "latest",
+    "husky": "^2.3.0",
+    "lint-staged": "^8.1.7",
+    "mocha": "^5.2.0",
+    "polymer-cli": "^1.9.10",
+    "prettier": "^1.17.1",
+    "prompt": "^1.0.0",
+    "replace-in-file": "^4.1.2",
+    "shelljs": "^0.8.3",
+    "wct-mocha": "^1.0.0"
+  },
+  "bugs": {
+    "url": "https://github.com/vaadin-component-factory/vcf-pwa-install-dialog/issues"
+  },
+  "homepage": "https://github.com/vaadin-component-factory/vcf-pwa-install-dialog#readme",
+  "directories": {
+    "test": "test"
+  }
+}
