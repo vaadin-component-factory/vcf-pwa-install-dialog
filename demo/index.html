@@ -8,6 +8,7 @@
     <script type="module">
       import '@polymer/iron-demo-helpers/demo-pages-shared-styles';
       import '@polymer/iron-demo-helpers/demo-snippet';
+      import '@vaadin/vaadin-button';
       import '../theme/lumo/vcf-pwa-install-dialog.js';
     </script>
     <custom-style>
@@ -18,7 +19,68 @@
     <div class="vertical-section-container">
       <demo-snippet>
         <template>
-          <vcf-pwa-install-dialog></vcf-pwa-install-dialog>
+          <vaadin-button id="open-default">Open the default dialog</vaadin-button>
+          <vaadin-button id="open-custom">Open the custom dialog</vaadin-button>
+
+          <vcf-pwa-install-dialog id="default">
+            <!-- 
+              The following selector is available for styling:
+              [part='step-content']: The element that wraps the contents of dialog
+             -->
+            <style dialog-styles>
+              [part='content'] {
+                max-width: 25em;
+                text-transform: uppercase;
+              }
+            </style>
+            <!-- 
+              Add a style tag with 'dialog-styles' attribute and place your styles inside it.
+              Wrap the content of dialog in an element with 'dialog-content' attribute..
+             -->
+            <div dialog-content>
+              <h3>Please install my awesome PWA!</h3>
+            </div>
+          </vcf-pwa-install-dialog>
+
+          <!-- 
+            Provide the texts for close button, install button, and stop showing text
+            using the following attributes 
+          -->
+          <vcf-pwa-install-dialog
+            id="custom"
+            close-text="X"
+            button-text="Install my app"
+            stop-showing-text="Never show this again!"
+          >
+            <style dialog-styles>
+              [part='content'] {
+                max-width: 25em;
+              }
+            </style>
+            <div dialog-content>
+              <h3>Please install my awesome PWA!</h3>
+            </div>
+          </vcf-pwa-install-dialog>
+
+          <script>
+            window.addEventListener('WebComponentsReady', () => {
+              const defaultButton = document.getElementById('open-default');
+              const defaultDialog = document.getElementById('default');
+              defaultButton.addEventListener('click', () => {
+                defaultDialog.opened = true;
+              });
+
+              const customDialog = document.getElementById('custom');
+              const customButton = document.getElementById('open-custom');
+              customButton.addEventListener('click', () => {
+                // Use the following localStorage variable to check
+                // if the user has checked the stop showing checkbox
+                if (!localStorage.getItem('vcf-pwa-stop-showing')) {
+                  customDialog.opened = true;
+                }
+              });
+            });
+          </script>
         </template>
       </demo-snippet>
     </div>
