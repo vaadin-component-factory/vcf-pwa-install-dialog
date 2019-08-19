@@ -1,6 +1,6 @@
 {
   "name": "@vaadin-component-factory/vcf-pwa-install-dialog",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Vaadin Component Factory PWA Install Dialog",
   "main": "theme/lumo/vcf-pwa-install-dialog.js",
   "author": "Vaadin Ltd",

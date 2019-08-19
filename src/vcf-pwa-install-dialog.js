@@ -8,18 +8,31 @@ import '@vaadin/vaadin-checkbox';
 import { openPwaInstallPrompt } from './pwa-install-prompt';
 
 /**
- * The following selectors are available for styling:
+ * The following selector is available for styling:
  *
  * Selector | Description
  * ----------------|----------------
  * `[part='step-content']` | The element that wraps the contents of dialog
  *
- * How to provide and style content of the steps:
- *  Add a style tag with 'dialog-styles' attribute and place your styles inside it.
- *  Wrap the content dialog in an element with 'dialog-content' attribute.
- *
+ * How to provide styles of the content:
+ *  Create a `dom-module` element like the following example
+ * 
  * ```html
- * <style dialog-styles></style>
+ * <dom-module id="my-pwa-styles" theme-for="vcf-pwa-install-dialog">
+ *  <template>
+ *    <style>
+ *      [part='content'] {
+ *        max-width: 25em;
+ *      }
+ *    </style>
+ *  </template>
+ * </dom-module>
+ * ```
+ *
+ * How to provide content of the dialog:
+ *  Wrap the content of dialog in an element with 'dialog-content' attribute.
+ * 
+ * ```html
  * <div dialog-content>
  *    Dialog content
  * </div>
@@ -61,7 +74,6 @@ class VcfPwaInstallDialog extends ElementMixin(ThemableMixin(PolymerElement)) {
               font-size: var(--lumo-font-size-xs);
             }
           </style>
-          <style inner-h-t-m-l="[[styles.innerHTML]]"></style>
           <vaadin-button theme="tertiary" class="close" on-click="closeDialog">[[closeText]]</vaadin-button>
           <div part="content" inner-h-t-m-l="[[content.innerHTML]]"></div>
           <template is="dom-if" if="[[!ios]]">
@@ -84,7 +96,7 @@ class VcfPwaInstallDialog extends ElementMixin(ThemableMixin(PolymerElement)) {
   }
 
   static get version() {
-    return '0.1.1';
+    return '0.2.0';
   }
 
   static get properties() {
@@ -111,10 +123,6 @@ class VcfPwaInstallDialog extends ElementMixin(ThemableMixin(PolymerElement)) {
         reflectToAttribute: true,
         notify: true
       },
-      styles: {
-        type: Object,
-        value: () => {}
-      },
       content: {
         type: Object,
         value: () => {}
@@ -127,7 +135,6 @@ class VcfPwaInstallDialog extends ElementMixin(ThemableMixin(PolymerElement)) {
 
     this.ios = this.iOSSafari();
 
-    this.styles = this.querySelector('[dialog-styles]');
     this.content = this.querySelector('[dialog-content]');
 
     this.innerHTML = '';

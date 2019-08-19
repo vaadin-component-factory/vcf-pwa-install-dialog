@@ -10,6 +10,7 @@
       import '@polymer/iron-demo-helpers/demo-snippet';
       import '@vaadin/vaadin-button';
       import '../theme/lumo/vcf-pwa-install-dialog.js';
+      import './styles.js';
     </script>
     <custom-style>
       <style is="custom-style" include="demo-pages-shared-styles"></style>
@@ -22,20 +23,14 @@
           <vaadin-button id="open-default">Open the default dialog</vaadin-button>
           <vaadin-button id="open-custom">Open the custom dialog</vaadin-button>
 
+          <!-- 
+            The following selector is available for styling:
+            [part='step-content']: The element that wraps the contents of dialog
+            Refer to styles.js file for an example.
+            -->
           <vcf-pwa-install-dialog id="default">
             <!-- 
-              The following selector is available for styling:
-              [part='step-content']: The element that wraps the contents of dialog
-             -->
-            <style dialog-styles>
-              [part='content'] {
-                max-width: 25em;
-                text-transform: uppercase;
-              }
-            </style>
-            <!-- 
-              Add a style tag with 'dialog-styles' attribute and place your styles inside it.
-              Wrap the content of dialog in an element with 'dialog-content' attribute..
+              Wrap the content of dialog in an element with 'dialog-content' attribute.
              -->
             <div dialog-content>
               <h3>Please install my awesome PWA!</h3>
@@ -44,7 +39,7 @@
 
           <!-- 
             Provide the texts for close button, install button, and stop showing text
-            using the following attributes 
+            using the following attributes.
           -->
           <vcf-pwa-install-dialog
             id="custom"
@@ -52,11 +47,6 @@
             button-text="Install my app"
             stop-showing-text="Never show this again!"
           >
-            <style dialog-styles>
-              [part='content'] {
-                max-width: 25em;
-              }
-            </style>
             <div dialog-content>
               <h3>Please install my awesome PWA!</h3>
             </div>
