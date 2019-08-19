@@ -8,19 +8,23 @@ import '@vaadin/vaadin-checkbox';
 import { openPwaInstallPrompt } from './pwa-install-prompt';
 
 /**
- * The following selector is available for styling:
+ * The following selectors are available for styling:
  *
  * Selector | Description
  * ----------------|----------------
- * `[part='step-content']` | The element that wraps the contents of dialog
+ * `[part='wrapper']` | The element that wraps all the elements inside the dialog
+ * `[part='content']` | The element that wraps the contents of dialog
  *
  * How to provide styles of the content:
  *  Create a `dom-module` element like the following example
- * 
+ *
  * ```html
  * <dom-module id="my-pwa-styles" theme-for="vcf-pwa-install-dialog">
  *  <template>
  *    <style>
+ *      [part='wrapper'] {
+ *        padding: 1em;
+ *      }
  *      [part='content'] {
  *        max-width: 25em;
  *      }
@@ -31,7 +35,7 @@ import { openPwaInstallPrompt } from './pwa-install-prompt';
  *
  * How to provide content of the dialog:
  *  Wrap the content of dialog in an element with 'dialog-content' attribute.
- * 
+ *
  * ```html
  * <div dialog-content>
  *    Dialog content
@@ -74,17 +78,17 @@ class VcfPwaInstallDialog extends ElementMixin(ThemableMixin(PolymerElement)) {
               font-size: var(--lumo-font-size-xs);
             }
           </style>
-          <vaadin-button theme="tertiary" class="close" on-click="closeDialog">[[closeText]]</vaadin-button>
-          <div part="content" inner-h-t-m-l="[[content.innerHTML]]"></div>
-          <template is="dom-if" if="[[!ios]]">
-            <vaadin-button theme="primary" class="install-button" on-click="showInstallDialog">
-              <span>[[buttonText]]</span>
-            </vaadin-button>
-          </template>
-          <div class="stop-showing-container">
-            <vaadin-checkbox id="stop-showing" on-change="onCheckNeverShow"
-              >[[stopShowingText]]</vaadin-checkbox
-            >
+          <div part="wrapper">
+            <vaadin-button theme="tertiary" class="close" on-click="closeDialog">[[closeText]]</vaadin-button>
+            <div part="content" inner-h-t-m-l="[[content.innerHTML]]"></div>
+            <template is="dom-if" if="[[!ios]]">
+              <vaadin-button theme="primary" class="install-button" on-click="showInstallDialog">
+                <span>[[buttonText]]</span>
+              </vaadin-button>
+            </template>
+            <div class="stop-showing-container">
+              <vaadin-checkbox id="stop-showing" on-change="onCheckNeverShow">[[stopShowingText]]</vaadin-checkbox>
+            </div>
           </div>
         </template>
       </vaadin-dialog>
@@ -96,7 +100,7 @@ class VcfPwaInstallDialog extends ElementMixin(ThemableMixin(PolymerElement)) {
   }
 
   static get version() {
-    return '0.2.0';
+    return '0.2.1';
   }
 
   static get properties() {
@@ -111,7 +115,7 @@ class VcfPwaInstallDialog extends ElementMixin(ThemableMixin(PolymerElement)) {
       },
       stopShowingText: {
         type: String,
-        value: 'Don\'t show me this message again'
+        value: "Don't show me this message again"
       },
       ios: {
         type: Boolean,
