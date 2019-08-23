@@ -4,8 +4,7 @@ import { ElementMixin } from '@vaadin/vaadin-element-mixin';
 import '@vaadin/vaadin-button';
 import '@vaadin/vaadin-dialog';
 import '@vaadin/vaadin-checkbox';
-
-import { openPwaInstallPrompt } from './pwa-install-prompt';
+import { openPwaInstallPrompt } from '@vaadin-component-factory/vcf-pwa-install-helpers';
 
 /**
  * The following selectors are available for styling:
@@ -41,6 +40,13 @@ import { openPwaInstallPrompt } from './pwa-install-prompt';
  *    Dialog content
  * </div>
  * ```
+ *
+ * The component fires 5 custom events:
+ *  - vcf-pwa-prompt-shown: when the dialog opens
+ *  - vcf-pwa-prompt-dismissed: when the dialog is closed
+ *  - vcf-pwa-install-triggered: when the user click the "install app" button
+ *  - vcf-pwa-install-successful: when the user installs the app
+ *  - vcf-pwa-install-cancelled: when the user cancels the installation of the app
  */
 class VcfPwaInstallDialog extends ElementMixin(ThemableMixin(PolymerElement)) {
   static get template() {
@@ -59,7 +65,7 @@ class VcfPwaInstallDialog extends ElementMixin(ThemableMixin(PolymerElement)) {
         }
       </style>
 
-      <vaadin-dialog opened="{{opened}}" on-opened-changed="onDialogOpenedChanged">
+      <vaadin-dialog id="dialog" opened="{{opened}}">
         <template>
           <style>
             .close {
@@ -100,7 +106,7 @@ class VcfPwaInstallDialog extends ElementMixin(ThemableMixin(PolymerElement)) {
   }
 
   static get version() {
-    return '0.2.1';
+    return '0.3.0';
   }
 
   static get properties() {
@@ -125,7 +131,8 @@ class VcfPwaInstallDialog extends ElementMixin(ThemableMixin(PolymerElement)) {
         type: Boolean,
         value: false,
         reflectToAttribute: true,
-        notify: true
+        notify: true,
+        observer: 'onDialogOpenedChanged'
       },
       content: {
         type: Object,
@@ -152,9 +159,15 @@ class VcfPwaInstallDialog extends ElementMixin(ThemableMixin(PolymerElement)) {
     return this.iOSDevice() && navigator.userAgent.match(/AppleWebKit/) && !navigator.userAgent.match(/CriOS/i);
   }
 
-  onDialogOpenedChanged() {
-    if (window.ga) {
-      window.ga('send', 'event', 'PWA', `custom prompt ${this.$.dialog.opened ? 'shown' : 'dismissed'}`);
+  onDialogOpenedChanged(newValue, oldValue) {
+    if (oldValue !== null) {
+      this.dispatchEvent(
+        new CustomEvent(`vcf-pwa-prompt-${newValue ? 'shown' : 'dismissed'}`, {
+          bubbles: true,
+          composed: true,
+          cancelable: true
+        })
+      );
     }
   }
 
@@ -163,24 +176,17 @@ class VcfPwaInstallDialog extends ElementMixin(ThemableMixin(PolymerElement)) {
   }
 
   showInstallDialog() {
-    // Track the event
-    if (window.ga) {
-      window.ga('send', 'event', 'PWA', 'install triggered', 'vcf-pwa-install-dialog');
-    }
+    this.dispatchEvent(new CustomEvent('vcf-pwa-install-triggered', { bubbles: true, composed: true }));
 
     // Show the prompt
     openPwaInstallPrompt().then(choiceResult => {
       if (choiceResult.outcome === 'accepted') {
-        if (window.ga) {
-          window.ga('send', 'event', 'PWA', 'install successful', 'vcf-pwa-install-dialog');
-        }
+        this.dispatchEvent(new CustomEvent('vcf-pwa-install-successful', { bubbles: true, composed: true }));
 
         localStorage.setItem('vcf-pwa-installed', 'true');
         this.closeDialog();
       } else {
-        if (window.ga) {
-          window.ga('send', 'event', 'PWA', 'install cancelled', 'vcf-pwa-install-dialog');
-        }
+        this.dispatchEvent(new CustomEvent('vcf-pwa-install-cancelled', { bubbles: true, composed: true }));
       }
     });
   }

@@ -1,6 +1,6 @@
 {
   "name": "@vaadin-component-factory/vcf-pwa-install-dialog",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Vaadin Component Factory PWA Install Dialog",
   "main": "theme/lumo/vcf-pwa-install-dialog.js",
   "author": "Vaadin Ltd",
@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "@polymer/polymer": "^3.0.0",
+    "@vaadin-component-factory/vcf-pwa-install-helpers": "^0.1.0",
     "@vaadin/vaadin-button": "2.2.0",
     "@vaadin/vaadin-checkbox": "^2.2.10",
     "@vaadin/vaadin-dialog": "^2.2.1",

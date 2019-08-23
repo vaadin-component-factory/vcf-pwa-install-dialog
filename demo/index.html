@@ -70,6 +70,18 @@
                   customDialog.opened = true;
                 }
               });
+
+              /*
+               * The component fires 5 custom events:
+               *  - vcf-pwa-prompt-shown: when the dialog opens
+               *  - vcf-pwa-prompt-dismissed: when the dialog is closed
+               *  - vcf-pwa-install-triggered: when the user click the "install app" button
+               *  - vcf-pwa-install-successful: when the user installs the app
+               *  - vcf-pwa-install-cancelled: when the user cancels the installation of the app
+               */
+               defaultDialog.addEventListener('vcf-pwa-prompt-shown', () => {
+                console.log('Dialog opened');
+              });
             });
           </script>
         </template>
