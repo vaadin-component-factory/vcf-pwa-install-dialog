@@ -52,7 +52,7 @@ Create a `dom-module` element like the following example and add your styles:
 </dom-module>
 ```
 
-*Refer to [demos](##running-demo) for real-world examples.*
+*Refer to [demos](#running-demo) for real-world examples.*
 
 ### Attributes
  - `close-text`: The text for "Close" button.
@@ -70,7 +70,7 @@ The component fires 5 custom events:
 
 When the user checks the "Stop Showing" checkbox, a variable called `vcf-pwa-stop-showing` is saved on localStorage. You can use this variable to avoid showing the dialog in future visits.
 
-*Refer to [demos](##running-demo) for an example.*
+*Refer to [demos](#running-demo) for an example.*
 
 ## Running demo
 
