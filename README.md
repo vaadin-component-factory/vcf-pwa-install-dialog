@@ -1,7 +1,5 @@
 # &lt;vcf-pwa-install-dialog&gt;
 
-
-
 ## Installation
 
 Install `vcf-pwa-install-dialog`:
@@ -10,11 +8,69 @@ Install `vcf-pwa-install-dialog`:
 npm i @vaadin-component-factory/vcf-pwa-install-dialog --save
 ```
 
+## Usage
+
 Once installed, import it in your application:
 
 ```js
 import '@vaadin-component-factory/vcf-pwa-install-dialog/vcf-pwa-install-dialog.js';
 ```
+
+And use it:
+
+```html
+<vcf-pwa-install-dialog>
+  <div dialog-content>
+    Dialog content
+  </div>
+</vcf-pwa-install-dialog>
+```
+
+Wrap the content of dialog in an element with `dialog-content` attribute.
+
+### Styling
+The following selectors are available for styling:
+ - `[part='wrapper']`: The element that wraps all the elements inside the dialog.
+ - `[part='content']`: The element that wraps the contents of dialog.
+
+#### How to provide styles of the content:
+
+Create a `dom-module` element like the following example and add your styles:
+
+```html
+<dom-module id="my-pwa-styles" theme-for="vcf-pwa-install-dialog">
+ <template>
+   <style>
+     [part='wrapper'] {
+       padding: 1em;
+     }
+     [part='content'] {
+       max-width: 25em;
+     }
+   </style>
+ </template>
+</dom-module>
+```
+
+*Refer to [demos](##running-demo) for real-world examples.*
+
+### Attributes
+ - `close-text`: The text for "Close" button.
+ - `button-text`: The text for "Install" button.
+ - `stop-showing-text`: The text for "Stop Showing" checkbox.
+ - `opened`: Use it to toggle the dialog.
+
+### Events
+The component fires 5 custom events:
+ - `vcf-pwa-prompt-shown`: when the dialog opens.
+ - `vcf-pwa-prompt-dismissed`: when the dialog is closed.
+ - `vcf-pwa-install-triggered`: when the user clicks the "install app" button.
+ - `vcf-pwa-install-successful`: when the user installs the app.
+ - `vcf-pwa-install-cancelled`: when the user cancels the installation of the app.
+
+When the user checks the "Stop Showing" checkbox, a variable called `vcf-pwa-stop-showing` is saved on localStorage. You can use this variable to avoid showing the dialog in future visits.
+
+*Refer to [demos](##running-demo) for an example.*
 
 ## Running demo
 
@@ -28,7 +84,7 @@ import '@vaadin-component-factory/vcf-pwa-install-dialog/vcf-pwa-install-dialog.
 
 ## Contributing
 
-  To contribute to the component, please read [the guideline](https://github.com/vaadin/vaadin-core/blob/master/CONTRIBUTING.md) first.
+To contribute to the component, please read [the guideline](https://github.com/vaadin/vaadin-core/blob/master/CONTRIBUTING.md) first.
 
 ## License
 
