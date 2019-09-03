@@ -105,10 +105,6 @@ class VcfPwaInstallDialog extends ElementMixin(ThemableMixin(PolymerElement)) {
     return 'vcf-pwa-install-dialog';
   }
 
-  static get version() {
-    return '0.3.4';
-  }
-
   static get properties() {
     return {
       closeText: {

@@ -7,15 +7,29 @@
     <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
     <script type="module" src="demo.js"></script>
     <custom-style>
-      <style is="custom-style" include="demo-pages-shared-styles"></style>
+      <style is="custom-style" include="demo-pages-shared-styles">
+        .centered {
+          max-width: 1000px;
+        }
+        main {
+          opacity: 1;
+          transition: opacity 1s;
+        }
+        main.hidden {
+          opacity: 0;
+        }
+      </style>
     </custom-style>
+    <script>
+      window.addEventListener('WebComponentsReady', () => document.querySelector('main').classList.remove('hidden'));
+    </script>
   </head>
   <body>
-    <div class="vertical-section-container">
+    <main class="vertical-section-container centered hidden">
+      <h3>Basic usage</h3>
       <demo-snippet>
         <template>
           <vaadin-button id="open-default">Open the default dialog</vaadin-button>
-          <vaadin-button id="open-custom">Open the custom dialog</vaadin-button>
 
           <!-- 
             The following selectors are available for styling:
@@ -31,6 +45,34 @@
               <h3>Please install my awesome PWA!</h3>
             </div>
           </vcf-pwa-install-dialog>
+
+          <script>
+            window.addEventListener('WebComponentsReady', () => {
+              const defaultButton = document.getElementById('open-default');
+              const defaultDialog = document.getElementById('default');
+              defaultButton.addEventListener('click', () => {
+                defaultDialog.opened = true;
+              });
+
+              /*
+               * The component fires 5 custom events:
+               *  - vcf-pwa-prompt-shown: when the dialog opens
+               *  - vcf-pwa-prompt-dismissed: when the dialog is closed
+               *  - vcf-pwa-install-triggered: when the user click the "install app" button
+               *  - vcf-pwa-install-successful: when the user installs the app
+               *  - vcf-pwa-install-cancelled: when the user cancels the installation of the app
+               */
+              defaultDialog.addEventListener('vcf-pwa-prompt-shown', () => {
+                console.log('Dialog opened');
+              });
+            });
+          </script>
+        </template>
+      </demo-snippet>
+      <h3>Custom texts</h3>
+      <demo-snippet>
+        <template>
+          <vaadin-button id="open-custom">Open the custom dialog</vaadin-button>
 
           <!-- 
             Provide the texts for close button, install button, and stop showing text
@@ -49,12 +91,6 @@
 
           <script>
             window.addEventListener('WebComponentsReady', () => {
-              const defaultButton = document.getElementById('open-default');
-              const defaultDialog = document.getElementById('default');
-              defaultButton.addEventListener('click', () => {
-                defaultDialog.opened = true;
-              });
-
               const customDialog = document.getElementById('custom');
               const customButton = document.getElementById('open-custom');
               customButton.addEventListener('click', () => {
@@ -64,22 +100,10 @@
                   customDialog.opened = true;
                 }
               });
-
-              /*
-               * The component fires 5 custom events:
-               *  - vcf-pwa-prompt-shown: when the dialog opens
-               *  - vcf-pwa-prompt-dismissed: when the dialog is closed
-               *  - vcf-pwa-install-triggered: when the user click the "install app" button
-               *  - vcf-pwa-install-successful: when the user installs the app
-               *  - vcf-pwa-install-cancelled: when the user cancels the installation of the app
-               */
-               defaultDialog.addEventListener('vcf-pwa-prompt-shown', () => {
-                console.log('Dialog opened');
-              });
             });
           </script>
         </template>
       </demo-snippet>
-    </div>
+    </main>
   </body>
 </html>
