@@ -58,7 +58,7 @@ Create a `dom-module` element like the following example and add your styles:
 </dom-module>
 ```
 
-_Refer to [demos](#running-demo) for real-world examples._
+_Refer to [demos](https://vcf-pwa-install-dialog.netlify.com/) for real-world examples._
 
 ### Attributes
 
@@ -79,7 +79,7 @@ The component fires 5 custom events:
 
 When the user checks the "Stop Showing" checkbox, a variable called `vcf-pwa-stop-showing` is saved on localStorage. You can use this variable to avoid showing the dialog in future visits.
 
-_Refer to [demos](#running-demo) for an example._
+_Refer to [demos](https://vcf-pwa-install-dialog.netlify.com/) for an example._
 
 ## Running demo
 
