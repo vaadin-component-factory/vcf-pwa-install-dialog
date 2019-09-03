@@ -106,7 +106,7 @@ class VcfPwaInstallDialog extends ElementMixin(ThemableMixin(PolymerElement)) {
   }
 
   static get version() {
-    return '0.3.3';
+    return '0.3.4';
   }
 
   static get properties() {
