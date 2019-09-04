@@ -17,7 +17,7 @@ npm i @vaadin-component-factory/vcf-pwa-install-dialog --save
 Once installed, import it in your application:
 
 ```js
-import '@vaadin-component-factory/vcf-pwa-install-dialog/vcf-pwa-install-dialog.js';
+import '@vaadin-component-factory/vcf-pwa-install-dialog';
 ```
 
 And use it:
