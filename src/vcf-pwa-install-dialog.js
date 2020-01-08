@@ -1,6 +1,7 @@
 import { html, PolymerElement } from '@polymer/polymer/polymer-element';
 import { ThemableMixin } from '@vaadin/vaadin-themable-mixin';
 import { ElementMixin } from '@vaadin/vaadin-element-mixin';
+import '@vaadin/vaadin-license-checker/vaadin-license-checker';
 import '@vaadin/vaadin-button';
 import '@vaadin/vaadin-dialog';
 import '@vaadin/vaadin-checkbox';
@@ -137,6 +138,19 @@ class VcfPwaInstallDialog extends ElementMixin(ThemableMixin(PolymerElement)) {
     };
   }
 
+  /**
+   * @protected
+   */
+  static _finalizeClass() {
+    super._finalizeClass();
+
+    const devModeCallback = window.Vaadin.developmentModeCallback;
+    const licenseChecker = devModeCallback && devModeCallback['vaadin-license-checker'];
+    if (typeof licenseChecker === 'function') {
+      licenseChecker(VcfPwaInstallDialog);
+    }
+  }
+
   ready() {
     super.ready();
 
@@ -207,7 +221,3 @@ customElements.define(VcfPwaInstallDialog.is, VcfPwaInstallDialog);
  * @namespace Vaadin
  */
 window.Vaadin.VcfPwaInstallDialog = VcfPwaInstallDialog;
-
-if (window.Vaadin.runIfDevelopmentMode) {
-  window.Vaadin.runIfDevelopmentMode('vaadin-license-checker', VcfPwaInstallDialog);
-}
