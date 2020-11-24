@@ -1,6 +1,6 @@
 {
   "name": "@vaadin-component-factory/vcf-pwa-install-dialog",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Vaadin Component Factory PWA Install Dialog",
   "main": "theme/lumo/vcf-pwa-install-dialog.js",
   "author": "Vaadin Ltd",
@@ -39,12 +39,11 @@
   },
   "dependencies": {
     "@polymer/polymer": "^3.0.0",
-    "@vaadin-component-factory/vcf-pwa-install-helpers": "^1.0.0",
+    "@vaadin-component-factory/vcf-pwa-install-helpers": "^1.0.1",
     "@vaadin/vaadin-button": "2.2.0",
     "@vaadin/vaadin-checkbox": "^2.2.10",
     "@vaadin/vaadin-dialog": "^2.2.1",
     "@vaadin/vaadin-element-mixin": "^2.1.3",
-    "@vaadin/vaadin-license-checker": "^2.1.2",
     "@vaadin/vaadin-lumo-styles": "^1.5.0",
     "@vaadin/vaadin-themable-mixin": "^1.4.4"
   },
